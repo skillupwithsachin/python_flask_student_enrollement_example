@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student Enrollment</h1>
+<form action="/enroll" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="age" placeholder="Age" required>
+    <button type="submit">Enroll</button>
+</form>
+
+<h2>Enrolled Students</h2>
+<ul>
+    {% for student in students %}
+        <li>
+            {{ student.name }} ({{ student.age }} years old, {{ student.email }})
+            <form action="/delete/{{ student.email }}" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
